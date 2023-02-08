@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var resultText : TextView
     lateinit var imageButton: ImageButton
-    lateinit var editText: EditText
-    lateinit var fab: FloatingActionButton
 
     lateinit var activityResultLauncher : ActivityResultLauncher<Intent>
 
@@ -29,8 +27,6 @@ class MainActivity : AppCompatActivity() {
 
         resultText = findViewById(R.id.textView)
         imageButton = findViewById(R.id.imageButton)
-        editText = findViewById(R.id.editText)
-        fab = findViewById(R.id.fab)
 
         activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
             ActivityResultCallback { result ->
@@ -43,9 +39,7 @@ class MainActivity : AppCompatActivity() {
                     val speakResult : ArrayList<String> = data
                         .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS) as ArrayList<String>
 
-                    //resultText.text = speakResult[0]
-
-                    editText.setText(speakResult[0])
+                    resultText.text = speakResult[0]
 
                 }
 
@@ -56,14 +50,6 @@ class MainActivity : AppCompatActivity() {
             convertSpeech()
 
         }
-
-        fab.setOnClickListener {
-
-            convertSpeech()
-
-        }
-
-
     }
 
     fun convertSpeech(){
